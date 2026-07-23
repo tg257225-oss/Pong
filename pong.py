@@ -6,7 +6,12 @@ window = turtle.Screen()
 window.title("Pong")
 window.bgcolor("#677087")
 window.setup(width=900, height=600)
+window.cv._rootwindow.resizable(False, False)
 window.tracer(0)
+
+# score
+scr_1 = 0
+scr_2 = 0
 
 
 # paddle numero 1
@@ -38,6 +43,18 @@ ball.goto(0, 0)
 
 ball.dx = 1.2
 ball.dy = 1.2
+user1="timm2"
+user2="timmy"
+# pen
+pen = turtle.Turtle()
+pen.speed(0)
+pen.color("white")
+pen.penup()
+pen.hideturtle()
+pen.goto(0, 260)
+pen.write("PLAYER 1: 0                                PLAYER 2: 0", align="center", font=("Lucida Sans", 24, "bold"))
+
+
 
 # dict
 keys_pressed = {
@@ -125,10 +142,18 @@ while True:
     if ball.xcor() > 435:
         ball.goto(0, 0)
         ball.dx *= -1
+        scr_1 += 1
+        pen.clear()
+        pen.write("PLAYER 1: {}                                PLAYER 2: {}".format(scr_1, scr_2), align="center",
+                  font=("Lucida Sans", 24, "bold"))
 
     if ball.xcor() < -435:
         ball.goto(0, 0)
         ball.dx *= -1
+        scr_2 += 1
+        pen.clear()
+        pen.write("PLAYER 1: {}                                PLAYER 2: {}".format(scr_1, scr_2), align="center",
+                  font=("Lucida Sans", 24, "bold"))
 
     if not pad_1.ycor() < 245:
         pad_1.sety(245)
