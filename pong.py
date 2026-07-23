@@ -55,19 +55,63 @@ def pad_2_down():
     y-=15
     pad_2.sety(y)
 
+keys_pressed = {
+    "w": False,
+    "s": False,
+    "Up": False,
+    "Down": False
+}
+
+def press_w():
+    keys_pressed["w"] = True
+def release_w():
+    keys_pressed["w"] = False
+
+def press_s():
+    keys_pressed["s"] = True
+def release_s():
+    keys_pressed["s"] = False
+
+def press_up():
+    keys_pressed["Up"] = True
+def release_up():
+    keys_pressed["Up"] = False
+
+def press_down():
+    keys_pressed["Down"] = True
+def release_down():
+    keys_pressed["Down"] = False
+
 window.listen()
-window.onkeypress(pad_1_up, "w")
-window.onkeypress(pad_1_down, "s")
-window.onkeypress(pad_2_up, "Up")
-window.onkeypress(pad_2_down, "Down")
+window.onkeypress(press_w, "w")
+window.onkeyrelease(release_w, "w")
+
+window.onkeypress(press_s, "s")
+window.onkeyrelease(release_s, "s")
+
+window.onkeypress(press_up, "Up")
+window.onkeyrelease(release_up, "Up")
+
+window.onkeypress(press_down, "Down")
+window.onkeyrelease(release_down, "Down")
+
+def pad_move():
+    if keys_pressed["w"]:
+        y = pad_1.ycor()
+        y += 5
+        pad_1.sety(y)
+
+    if keys_pressed["s"]:
+        y = pad_1.ycor()
+        y -= 5
+        pad_1.sety(y)
 
 
 
 
+    window.ontimer(pad_move, 16)
 
 
-
-
-
+pad_move()
 while True:
     window.update()
