@@ -1,4 +1,5 @@
 import turtle
+import time
 
 
 window = turtle.Screen()
@@ -35,8 +36,8 @@ ball.color("white")
 ball.penup()
 ball.goto(0, 0)
 
-ball.dx = .1
-ball.dy = .1
+ball.dx = 1.2
+ball.dy = 1.2
 
 # dict
 keys_pressed = {
@@ -83,32 +84,30 @@ window.onkeyrelease(release_down, "Down")
 def pad_move():
     if keys_pressed["w"]:
         y = pad_1.ycor()
-        y += 5
+        y += 6
         pad_1.sety(y)
 
     if keys_pressed["s"]:
         y = pad_1.ycor()
-        y -= 5
+        y -= 6
         pad_1.sety(y)
 
     if keys_pressed["Up"]:
         y = pad_2.ycor()
-        y += 5
+        y += 6
         pad_2.sety(y)
 
     if keys_pressed["Down"]:
         y = pad_2.ycor()
-        y -= 5
+        y -= 6
         pad_2.sety(y)
 
     window.ontimer(pad_move, 16)
 
-def ball_move():
-    pass
 
-    window.ontimer(pad_move, 16)
 pad_move()
 while True:
+    time.sleep(1/240)
     window.update()
 
     ball.setx(ball.xcor() + ball.dx)
@@ -145,7 +144,9 @@ while True:
 
     # paddle ball collisions
     if (ball.xcor() > 390 and ball.xcor() < 400) and (ball.ycor() < pad_2.ycor()+ 65 and ball.ycor() > pad_2.ycor() - 65):
+        ball.setx(390)
         ball.dx *=-1
 
     if (ball.xcor() < -390 and ball.xcor() > -400) and (ball.ycor() < pad_1.ycor()+ 65 and ball.ycor() > pad_1.ycor() - 65):
+        ball.setx(-390)
         ball.dx *=-1
