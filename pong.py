@@ -1,5 +1,13 @@
 import turtle
 import time
+import winsound
+import pygame
+
+pygame.mixer.init()
+sound=pygame.mixer.Sound("Assets/sound.wav")
+sound.set_volume(.04)
+ding=pygame.mixer.Sound("Assets/ding.wav")
+ding.set_volume(.04)
 
 
 window = turtle.Screen()
@@ -9,7 +17,8 @@ window.setup(width=900, height=600)
 window.cv._rootwindow.resizable(False, False)
 window.tracer(0)
 
-# score
+game_state = "game1"
+# starting score
 scr_1 = 0
 scr_2 = 0
 
@@ -23,6 +32,7 @@ pad_1.color("white")
 pad_1.penup()
 pad_1.goto(-400, 0)
 
+
 # paddle numero 2
 pad_2 = turtle.Turtle()
 pad_2.speed(0)
@@ -31,6 +41,7 @@ pad_2.shapesize(stretch_wid=5.5, stretch_len=1)
 pad_2.color("white")
 pad_2.penup()
 pad_2.goto(400, 0)
+
 
 # ball
 ball = turtle.Turtle()
@@ -41,10 +52,9 @@ ball.color("white")
 ball.penup()
 ball.goto(0, 0)
 
+
 ball.dx = 1.2
 ball.dy = 1.2
-user1="timm2"
-user2="timmy"
 # pen
 pen = turtle.Turtle()
 pen.speed(0)
@@ -134,16 +144,19 @@ while True:
     if ball.ycor() > 282:
         ball.sety(282)
         ball.dy *= -1
+        sound.play()
 
     if ball.ycor() < -282:
         ball.sety(-282)
         ball.dy *= -1
+        sound.play()
 
     if ball.xcor() > 435:
         ball.goto(0, 0)
         ball.dx *= -1
         scr_1 += 1
         pen.clear()
+        ding.play()
         pen.write("PLAYER 1: {}                                PLAYER 2: {}".format(scr_1, scr_2), align="center",
                   font=("Lucida Sans", 24, "bold"))
 
@@ -152,26 +165,34 @@ while True:
         ball.dx *= -1
         scr_2 += 1
         pen.clear()
+        ding.play()
         pen.write("PLAYER 1: {}                                PLAYER 2: {}".format(scr_1, scr_2), align="center",
                   font=("Lucida Sans", 24, "bold"))
 
     if not pad_1.ycor() < 245:
         pad_1.sety(245)
 
+
     if not pad_1.ycor() > -245:
         pad_1.sety(-245)
+
 
     if not pad_2.ycor() < 245:
         pad_2.sety(245)
 
+
     if not pad_2.ycor() > -245:
         pad_2.sety(-245)
+
 
     # paddle ball collisions
     if (ball.xcor() > 390 and ball.xcor() < 400) and (ball.ycor() < pad_2.ycor()+ 65 and ball.ycor() > pad_2.ycor() - 65):
         ball.setx(390)
         ball.dx *=-1
+        sound.play()
 
     if (ball.xcor() < -390 and ball.xcor() > -400) and (ball.ycor() < pad_1.ycor()+ 65 and ball.ycor() > pad_1.ycor() - 65):
         ball.setx(-390)
         ball.dx *=-1
+        sound.play()
+
