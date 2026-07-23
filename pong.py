@@ -34,7 +34,10 @@ ball.color("white")
 ball.penup()
 ball.goto(0, 0)
 
+ball.dx = 2
+ball.dy =2
 
+# dict
 keys_pressed = {
     "w": False,
     "s": False,
@@ -97,12 +100,12 @@ def pad_move():
         y -= 5
         pad_2.sety(y)
 
-
-
-
     window.ontimer(pad_move, 16)
 
 
 pad_move()
 while True:
     window.update()
+
+    ball.setx(ball.xcor() + ball.dx)
+    ball.sety(ball.ycor() + ball.dy)
