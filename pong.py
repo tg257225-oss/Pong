@@ -119,3 +119,12 @@ while True:
     if ball.ycor() < -282:
         ball.sety(-282)
         ball.dy *= -1
+
+    if ball.xcor() > 435:
+        ball.goto(0, 0)
+        ball.dx *= -1
+
+    if ball.xcor() < -435:
+        ball.goto(0, 0)
+        ball.dx *= -1
+
