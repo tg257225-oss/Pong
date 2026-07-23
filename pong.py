@@ -34,26 +34,6 @@ ball.color("white")
 ball.penup()
 ball.goto(0, 0)
 
-# move da paddles
-def pad_1_up():
-    y = pad_1.ycor()
-    y+=15
-    pad_1.sety(y)
-
-def pad_1_down():
-    y = pad_1.ycor()
-    y-=15
-    pad_1.sety(y)
-
-def pad_2_up():
-    y = pad_2.ycor()
-    y += 15
-    pad_2.sety(y)
-
-def pad_2_down():
-    y = pad_2.ycor()
-    y-=15
-    pad_2.sety(y)
 
 keys_pressed = {
     "w": False,
@@ -95,6 +75,7 @@ window.onkeyrelease(release_up, "Up")
 window.onkeypress(press_down, "Down")
 window.onkeyrelease(release_down, "Down")
 
+# new paddle move function
 def pad_move():
     if keys_pressed["w"]:
         y = pad_1.ycor()
@@ -105,6 +86,16 @@ def pad_move():
         y = pad_1.ycor()
         y -= 5
         pad_1.sety(y)
+
+    if keys_pressed["Up"]:
+        y = pad_2.ycor()
+        y += 5
+        pad_2.sety(y)
+
+    if keys_pressed["Down"]:
+        y = pad_2.ycor()
+        y -= 5
+        pad_2.sety(y)
 
 
 
