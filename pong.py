@@ -1,6 +1,5 @@
 import turtle
 import time
-import winsound
 import pygame
 
 pygame.mixer.init()
@@ -61,8 +60,7 @@ pen.speed(0)
 pen.color("white")
 pen.penup()
 pen.hideturtle()
-pen.goto(0, 260)
-pen.write("PLAYER 1: 0                                PLAYER 2: 0", align="center", font=("Lucida Sans", 24, "bold"))
+
 
 
 
@@ -94,18 +92,54 @@ def press_down():
 def release_down():
     keys_pressed["Down"] = False
 
-window.listen()
-window.onkeypress(press_w, "w")
-window.onkeyrelease(release_w, "w")
 
-window.onkeypress(press_s, "s")
-window.onkeyrelease(release_s, "s")
 
-window.onkeypress(press_up, "Up")
-window.onkeyrelease(release_up, "Up")
 
-window.onkeypress(press_down, "Down")
-window.onkeyrelease(release_down, "Down")
+game_state = "game1"
+
+def draw_menu():
+    global game_state
+    game_state = "menu"
+    pad_1.hideturtle()
+    pad_2.hideturtle()
+    ball.hideturtle()
+    pen.clear()
+    pen.goto(0,250)
+    pen.write("PONG", align="center", font=("Lucida Sans", 30, "bold"))
+    pen.goto(0, 150)
+    pen.write("Press '1' to choose normal", align="center", font=("Lucida Sans", 20, "bold"))
+    window.listen()
+    window.onkeypress(game_1_press, "1")
+
+def game_1_press():
+    start_game_1()
+
+def start_game_1():
+    global game_state
+    if game_state == "menu":
+        game_state = "game1"
+        pen.clear()
+
+        pad_1.showturtle()
+        pad_2.showturtle()
+        ball.showturtle()
+        pen.goto(0, 260)
+        pen.write("PLAYER 1: 0                                PLAYER 2: 0", align="center",
+                  font=("Lucida Sans", 24, "bold"))
+        window.listen()
+        window.onkeypress(press_w, "w")
+        window.onkeyrelease(release_w, "w")
+
+        window.onkeypress(press_s, "s")
+        window.onkeyrelease(release_s, "s")
+
+        window.onkeypress(press_up, "Up")
+        window.onkeyrelease(release_up, "Up")
+
+        window.onkeypress(press_down, "Down")
+        window.onkeyrelease(release_down, "Down")
+
+
 
 # new paddle move function
 def pad_move():
@@ -128,71 +162,71 @@ def pad_move():
         y = pad_2.ycor()
         y -= 6
         pad_2.sety(y)
-
     window.ontimer(pad_move, 16)
 
-
+draw_menu()
 pad_move()
+
 while True:
     time.sleep(1/240)
     window.update()
+    if game_state == "game1":
+        ball.setx(ball.xcor() + ball.dx)
+        ball.sety(ball.ycor() + ball.dy)
 
-    ball.setx(ball.xcor() + ball.dx)
-    ball.sety(ball.ycor() + ball.dy)
+        # check da border
+        if ball.ycor() > 282:
+            ball.sety(282)
+            ball.dy *= -1
+            sound.play()
 
-    # check da border
-    if ball.ycor() > 282:
-        ball.sety(282)
-        ball.dy *= -1
-        sound.play()
+        if ball.ycor() < -282:
+            ball.sety(-282)
+            ball.dy *= -1
+            sound.play()
 
-    if ball.ycor() < -282:
-        ball.sety(-282)
-        ball.dy *= -1
-        sound.play()
+        if ball.xcor() > 435:
+            ball.goto(0, 0)
+            ball.dx *= -1
+            scr_1 += 1
+            pen.clear()
+            ding.play()
+            pen.write("PLAYER 1: {}                                PLAYER 2: {}".format(scr_1, scr_2), align="center",
+                      font=("Lucida Sans", 24, "bold"))
 
-    if ball.xcor() > 435:
-        ball.goto(0, 0)
-        ball.dx *= -1
-        scr_1 += 1
-        pen.clear()
-        ding.play()
-        pen.write("PLAYER 1: {}                                PLAYER 2: {}".format(scr_1, scr_2), align="center",
-                  font=("Lucida Sans", 24, "bold"))
+        if ball.xcor() < -435:
+            ball.goto(0, 0)
+            ball.dx *= -1
+            scr_2 += 1
+            pen.clear()
+            ding.play()
+            pen.write("PLAYER 1: {}                                PLAYER 2: {}".format(scr_1, scr_2), align="center",
+                      font=("Lucida Sans", 24, "bold"))
 
-    if ball.xcor() < -435:
-        ball.goto(0, 0)
-        ball.dx *= -1
-        scr_2 += 1
-        pen.clear()
-        ding.play()
-        pen.write("PLAYER 1: {}                                PLAYER 2: {}".format(scr_1, scr_2), align="center",
-                  font=("Lucida Sans", 24, "bold"))
-
-    if not pad_1.ycor() < 245:
-        pad_1.sety(245)
-
-
-    if not pad_1.ycor() > -245:
-        pad_1.sety(-245)
+        if not pad_1.ycor() < 245:
+            pad_1.sety(245)
 
 
-    if not pad_2.ycor() < 245:
-        pad_2.sety(245)
+        if not pad_1.ycor() > -245:
+            pad_1.sety(-245)
 
 
-    if not pad_2.ycor() > -245:
-        pad_2.sety(-245)
+        if not pad_2.ycor() < 245:
+            pad_2.sety(245)
 
 
-    # paddle ball collisions
-    if (ball.xcor() > 390 and ball.xcor() < 400) and (ball.ycor() < pad_2.ycor()+ 65 and ball.ycor() > pad_2.ycor() - 65):
-        ball.setx(390)
-        ball.dx *=-1
-        sound.play()
+        if not pad_2.ycor() > -245:
+            pad_2.sety(-245)
 
-    if (ball.xcor() < -390 and ball.xcor() > -400) and (ball.ycor() < pad_1.ycor()+ 65 and ball.ycor() > pad_1.ycor() - 65):
-        ball.setx(-390)
-        ball.dx *=-1
-        sound.play()
+
+        # paddle ball collisions
+        if (ball.xcor() > 390 and ball.xcor() < 400) and (ball.ycor() < pad_2.ycor()+ 65 and ball.ycor() > pad_2.ycor() - 65):
+            ball.setx(390)
+            ball.dx *=-1
+            sound.play()
+
+        if (ball.xcor() < -390 and ball.xcor() > -400) and (ball.ycor() < pad_1.ycor()+ 65 and ball.ycor() > pad_1.ycor() - 65):
+            ball.setx(-390)
+            ball.dx *=-1
+            sound.play()
 
