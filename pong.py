@@ -103,7 +103,10 @@ def pad_move():
 
     window.ontimer(pad_move, 16)
 
+def ball_move():
+    pass
 
+    window.ontimer(pad_move, 16)
 pad_move()
 while True:
     window.update()
@@ -128,3 +131,21 @@ while True:
         ball.goto(0, 0)
         ball.dx *= -1
 
+    if not pad_1.ycor() < 245:
+        pad_1.sety(245)
+
+    if not pad_1.ycor() > -245:
+        pad_1.sety(-245)
+
+    if not pad_2.ycor() < 245:
+        pad_2.sety(245)
+
+    if not pad_2.ycor() > -245:
+        pad_2.sety(-245)
+
+    # paddle ball collisions
+    if (ball.xcor() > 390 and ball.xcor() < 400) and (ball.ycor() < pad_2.ycor()+ 65 and ball.ycor() > pad_2.ycor() - 65):
+        ball.dx *=-1
+
+    if (ball.xcor() < -390 and ball.xcor() > -400) and (ball.ycor() < pad_1.ycor()+ 65 and ball.ycor() > pad_1.ycor() - 65):
+        ball.dx *=-1
