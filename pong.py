@@ -1,5 +1,6 @@
 import turtle
 
+
 window = turtle.Screen()
 window.title("Pong")
 window.bgcolor("#677087")
@@ -109,3 +110,12 @@ while True:
 
     ball.setx(ball.xcor() + ball.dx)
     ball.sety(ball.ycor() + ball.dy)
+
+    # check da border
+    if ball.ycor() > 282:
+        ball.sety(282)
+        ball.dy *= -1
+
+    if ball.ycor() < -282:
+        ball.sety(-282)
+        ball.dy *= -1
