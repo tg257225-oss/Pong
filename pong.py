@@ -413,10 +413,12 @@ while True:
     window.update()
     if game_state == "game1":
         if ai_state == "true":
-            if pad_2.ycor() < ball.ycor() + 50:
-                pad_2.sety(pad_2.ycor() + ai_speed)
-            elif pad_2.ycor() > ball.ycor() + 50:
-                pad_2.sety(pad_2.ycor() - ai_speed)
+            ai_speed = 1
+            if ball.xcor() > 0:
+                if pad_2.ycor() < ball.ycor() + 50:
+                    pad_2.sety(pad_2.ycor() + ai_speed)
+                elif pad_2.ycor() > ball.ycor() - 50:
+                    pad_2.sety(pad_2.ycor() - ai_speed)
         window.bgcolor("#b0afab")
         pad_1.shapesize(stretch_wid=5.5, stretch_len=1)
         pad_2.shapesize(stretch_wid=5.5, stretch_len=1)
@@ -488,7 +490,7 @@ while True:
         if ai_state == "true":
             if pad_2.ycor() < ball.ycor() + 70:
                 pad_2.sety(pad_2.ycor() + ai_speed)
-            elif pad_2.ycor() > ball.ycor() + 70:
+            elif pad_2.ycor() > ball.ycor() - 70:
                 pad_2.sety(pad_2.ycor() - ai_speed)
         window.bgcolor("#46579e")
         ball.setx(ball.xcor() + ball.dx)
@@ -564,14 +566,24 @@ while True:
 
     if game_state == "game3":
         if ai_state == "true":
-            if pad_2.ycor() < ball.ycor() + 40:
-                pad_2.sety(pad_2.ycor() + ai_speed)
-            elif pad_2.ycor() > ball.ycor() + 40:
-                pad_2.sety(pad_2.ycor() - ai_speed)
+            ai_speed = .8
+            if (ball.xcor() > 390 and ball.xcor() < 400) and (
+                    ball.ycor() < pad_2.ycor() + 140 and ball.ycor() > pad_2.ycor() - 140):
+                ball.setx(390)
+                ball.dx *= -1
+                sound.play()
+            pad_2.shapesize(stretch_wid=14.5, stretch_len=1)
+            pad_1.shapesize(stretch_wid=18.5, stretch_len=1)
+            if ball.xcor() > 0:
+                if pad_2.ycor() < ball.ycor() + 90:
+                    pad_2.sety(pad_2.ycor() + ai_speed)
+                elif pad_2.ycor() > ball.ycor() - 90:
+                    pad_2.sety(pad_2.ycor() - ai_speed)
 
         window.bgcolor("#E87DA3")
-        pad_1.shapesize(stretch_wid=18.5, stretch_len=1)
-        pad_2.shapesize(stretch_wid=18.5, stretch_len=1)
+        if ai_state =="false":
+            pad_1.shapesize(stretch_wid=18.5, stretch_len=1)
+            pad_2.shapesize(stretch_wid=18.5, stretch_len=1)
         ball.setx(ball.xcor() + ball.dx)
         ball.sety(ball.ycor() + ball.dy)
 
@@ -619,19 +631,31 @@ while True:
             pad_1.sety(-124)
 
 
-        if not pad_2.ycor() < 120:
-            pad_2.sety(124)
+        if ai_state == "false":
+            if not pad_2.ycor() < 124:
+                pad_2.sety(124)
 
 
-        if not pad_2.ycor() > -124:
-            pad_2.sety(-124)
+            if not pad_2.ycor() > -124:
+                pad_2.sety(-124)
+
+
+
+        if ai_state == "true":
+            if not pad_2.ycor() < 160:
+                pad_2.sety(160)
+
+
+            if not pad_2.ycor() > -160:
+                pad_2.sety(-160)
 
 
         # paddle ball collisions
-        if (ball.xcor() > 390 and ball.xcor() < 400) and (ball.ycor() < pad_2.ycor()+ 200 and ball.ycor() > pad_2.ycor() - 200):
-            ball.setx(390)
-            ball.dx *=-1
-            sound.play()
+        if ai_state == "false":
+            if (ball.xcor() > 390 and ball.xcor() < 400) and (ball.ycor() < pad_2.ycor()+ 200 and ball.ycor() > pad_2.ycor() - 200):
+                ball.setx(390)
+                ball.dx *=-1
+                sound.play()
 
         if (ball.xcor() < -390 and ball.xcor() > -400) and (ball.ycor() < pad_1.ycor()+ 200 and ball.ycor() > pad_1.ycor() - 200):
             ball.setx(-390)
