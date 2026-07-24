@@ -130,6 +130,7 @@ def handle_click2(x, y):
 game_state = "game1"
 
 def draw_menu():
+    window.bgcolor("#677087")
     global game_state
     game_state = "menu"
     pad_1.hideturtle()
@@ -268,8 +269,10 @@ while True:
     time.sleep(1/240)
     window.update()
     if game_state == "game1":
+        window.bgcolor("#b0afab")
         ball.setx(ball.xcor() + ball.dx)
         ball.sety(ball.ycor() + ball.dy)
+
 
         # check da border
         if ball.ycor() > 282:
@@ -332,18 +335,20 @@ while True:
             sound.play()
 
     if game_state == "game2":
+        window.bgcolor("#46579e")
         ball.setx(ball.xcor() + ball.dx)
         ball.sety(ball.ycor() + ball.dy)
+
 
         # check da border
         if ball.ycor() > 282:
             ball.sety(282)
-            ball.dy *= -1.2
+            ball.dy *= -1.1
             sound.play()
 
         if ball.ycor() < -282:
             ball.sety(-282)
-            ball.dy *= -1.2
+            ball.dy *= -1.1
             sound.play()
 
         if ball.xcor() > 435:
