@@ -270,6 +270,8 @@ while True:
     window.update()
     if game_state == "game1":
         window.bgcolor("#b0afab")
+        pad_1.shapesize(stretch_wid=5.5, stretch_len=1)
+        pad_2.shapesize(stretch_wid=5.5, stretch_len=1)
         ball.setx(ball.xcor() + ball.dx)
         ball.sety(ball.ycor() + ball.dy)
 
@@ -338,6 +340,8 @@ while True:
         window.bgcolor("#46579e")
         ball.setx(ball.xcor() + ball.dx)
         ball.sety(ball.ycor() + ball.dy)
+        pad_2.shapesize(stretch_wid=8.5, stretch_len=1)
+        pad_1.shapesize(stretch_wid=8.5, stretch_len=1)
 
 
         # check da border
@@ -379,18 +383,18 @@ while True:
             pen.write("Click 'E' to go back to the main menu.", align="center",
                       font=("Lucida Sans", 10, "normal"))
 
-        if not pad_1.ycor() < 245:
-            pad_1.sety(245)
+        if not pad_1.ycor() < 212:
+            pad_1.sety(212)
 
 
-        if not pad_1.ycor() > -245:
-            pad_1.sety(-245)
+        if not pad_1.ycor() > -212:
+            pad_1.sety(-212)
 
-        if not pad_2.ycor() < 245:
-            pad_2.sety(245)
+        if not pad_2.ycor() < 212:
+            pad_2.sety(212)
 
-        if not pad_2.ycor() > -245:
-            pad_2.sety(-245)
+        if not pad_2.ycor() > -212:
+            pad_2.sety(-212)
 
         # paddle ball collisions
         if (ball.xcor() > 390 and ball.xcor() < 400) and (
