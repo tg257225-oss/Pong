@@ -7,6 +7,8 @@ sound=pygame.mixer.Sound("Assets/sound.wav")
 sound.set_volume(.04)
 ding=pygame.mixer.Sound("Assets/ding.wav")
 ding.set_volume(.04)
+click=pygame.mixer.Sound("Assets/click.wav")
+click.set_volume(1)
 
 
 window = turtle.Screen()
@@ -164,12 +166,15 @@ def release_down():
 
 def handle_click1(x, y):
     game_1_press()
+    click.play()
 
 def handle_click2(x, y):
     game_2_press()
+    click.play()
 
 def handle_click3(x, y):
     game_3_press()
+    click.play()
 
 
 
@@ -180,10 +185,12 @@ game_state = "game1"
 def handle_click4(x, y):
     global ai_state
     ai_state = "true"
+    click.play()
 
 def handle_click5(x, y):
     global ai_state
     ai_state = "false"
+    click.play()
 
 
 def draw_menu():
