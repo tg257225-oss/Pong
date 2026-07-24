@@ -85,6 +85,12 @@ pen4.color("white")
 pen4.penup()
 pen4.hideturtle()
 
+pen5 = turtle.Turtle()
+pen5.speed(0)
+pen5.color("white")
+pen5.penup()
+pen5.hideturtle()
+
 # btn for modes
 btn1 = turtle.Turtle()
 btn1.shape("square")
@@ -199,7 +205,6 @@ def draw_menu():
 
     pen.clear()
     pen1.clear()
-    btn1.clearstamps()
 
     btn1.goto(0, 120)
     btn2.goto(0, 40)
@@ -224,6 +229,16 @@ def draw_menu():
     pen4.goto(300, 80)
     pen4.write("AI?", align="center", font=("Lucida Sans", 20, "bold"))
 
+    pen5.goto(0, -150)
+    pen5.write("Click on any of the rectangles above to choose a game mode.", align="center", font=("Lucida Sans", 16, "bold"))
+    pen5.goto(0, -180)
+    pen5.write("You can click on either the green or red rectangles on the right", align="center", font=("Lucida Sans", 12, "bold"))
+    pen5.goto(0, -200)
+    pen5.write("to choose if you want to play against AI (set to no by default and every time you go back to the menu).", align="center", font=("Lucida Sans", 12, "bold"))
+    pen5.goto(0, -230)
+    pen5.write("If you choose no AI, the 'W' and 'S' keys can be used to control the left paddle", align="center",font=("Lucida Sans", 12, "bold"))
+    pen5.goto(0, -250)
+    pen5.write("and the 'Arrow Up' and 'Arrow Down' keys can be used to control the right paddle.", align="center", font=("Lucida Sans", 12, "bold"))
 
 
     window.listen()
@@ -252,6 +267,7 @@ def start_game_1():
         pen2.clear()
         pen3.clear()
         pen4.clear()
+        pen5.clear()
         btn1.hideturtle()
         btn2.hideturtle()
         btn3.hideturtle()
@@ -292,6 +308,7 @@ def start_game_2():
         pen2.clear()
         pen3.clear()
         pen4.clear()
+        pen5.clear()
         btn1.hideturtle()
         btn2.hideturtle()
         btn3.hideturtle()
@@ -333,6 +350,7 @@ def start_game_3():
         pen2.clear()
         pen3.clear()
         pen4.clear()
+        pen5.clear()
         btn1.hideturtle()
         btn2.hideturtle()
         btn3.hideturtle()
