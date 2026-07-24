@@ -398,13 +398,13 @@ while True:
 
         # paddle ball collisions
         if (ball.xcor() > 390 and ball.xcor() < 400) and (
-                ball.ycor() < pad_2.ycor() + 65 and ball.ycor() > pad_2.ycor() - 65):
+                ball.ycor() < pad_2.ycor() + 95 and ball.ycor() > pad_2.ycor() - 95):
             ball.setx(390)
             ball.dx *= -1.2
             sound.play()
 
         if (ball.xcor() < -390 and ball.xcor() > -400) and (
-                ball.ycor() < pad_1.ycor() + 65 and ball.ycor() > pad_1.ycor() - 65):
+                ball.ycor() < pad_1.ycor() + 95 and ball.ycor() > pad_1.ycor() - 95):
             ball.setx(-390)
             ball.dx *= -1.2
             sound.play()
