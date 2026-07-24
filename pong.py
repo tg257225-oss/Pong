@@ -79,8 +79,13 @@ pen3.color("#E87DA3")
 pen3.penup()
 pen3.hideturtle()
 
+pen4 = turtle.Turtle()
+pen4.speed(0)
+pen4.color("white")
+pen4.penup()
+pen4.hideturtle()
 
-# btn
+# btn for modes
 btn1 = turtle.Turtle()
 btn1.shape("square")
 btn1.shapesize(stretch_wid=3, stretch_len=15)
@@ -102,7 +107,25 @@ btn3.penup()
 btn3.speed(0)
 btn3.color("#E87DA3")
 
-ai_speed = 4
+#ai toggle buttons
+ai_yes = turtle.Turtle()
+ai_yes.shape("square")
+ai_yes.shapesize(stretch_wid=2.5, stretch_len=5)
+ai_yes.penup()
+ai_yes.speed(0)
+ai_yes.color("green")
+
+ai_no = turtle.Turtle()
+ai_no.shape("square")
+ai_no.shapesize(stretch_wid=2.5, stretch_len=5)
+ai_no.penup()
+ai_no.speed(0)
+ai_no.color("red")
+
+
+
+# speed ai moves at pretty self explanatory
+ai_speed = 3
 
 # dict
 keys_pressed = {
@@ -143,12 +166,26 @@ def handle_click3(x, y):
     game_3_press()
 
 
+
+
+ai_state = "false"
 game_state = "game1"
+
+def handle_click4(x, y):
+    global ai_state
+    ai_state = "true"
+
+def handle_click5(x, y):
+    global ai_state
+    ai_state = "false"
+
 
 def draw_menu():
     window.bgcolor("#677087")
     global game_state
     game_state = "menu"
+    global ai_state
+    ai_state = "false"
     pad_1.hideturtle()
     pad_2.hideturtle()
     ball.hideturtle()
@@ -157,6 +194,9 @@ def draw_menu():
     btn2.showturtle()
     btn3.showturtle()
 
+    ai_yes.showturtle()
+    ai_no.showturtle()
+
     pen.clear()
     pen1.clear()
     btn1.clearstamps()
@@ -164,6 +204,10 @@ def draw_menu():
     btn1.goto(0, 120)
     btn2.goto(0, 40)
     btn3.goto(0, -40)
+
+
+    ai_yes.goto(300, 40)
+    ai_no.goto(300, -20)
 
 
     pen.goto(0,230)
@@ -177,6 +221,9 @@ def draw_menu():
     pen3.goto(-300, -55)
     pen3.write("Large Paddles", align="center", font=("Lucida Sans", 20, "bold"))
 
+    pen4.goto(300, 80)
+    pen4.write("AI?", align="center", font=("Lucida Sans", 20, "bold"))
+
 
 
     window.listen()
@@ -184,6 +231,8 @@ def draw_menu():
     btn1.onclick(handle_click1)
     btn2.onclick(handle_click2)
     btn3.onclick(handle_click3)
+    ai_yes.onclick(handle_click4)
+    ai_no.onclick(handle_click5)
 
 def game_1_press():
     start_game_1()
@@ -202,9 +251,12 @@ def start_game_1():
         pen1.clear()
         pen2.clear()
         pen3.clear()
+        pen4.clear()
         btn1.hideturtle()
         btn2.hideturtle()
         btn3.hideturtle()
+        ai_yes.hideturtle()
+        ai_no.hideturtle()
         pad_1.showturtle()
         pad_2.showturtle()
         ball.showturtle()
@@ -239,9 +291,12 @@ def start_game_2():
         pen1.clear()
         pen2.clear()
         pen3.clear()
+        pen4.clear()
         btn1.hideturtle()
         btn2.hideturtle()
         btn3.hideturtle()
+        ai_yes.hideturtle()
+        ai_no.hideturtle()
         pad_1.showturtle()
         pad_2.showturtle()
         ball.showturtle()
@@ -277,9 +332,12 @@ def start_game_3():
         pen1.clear()
         pen2.clear()
         pen3.clear()
+        pen4.clear()
         btn1.hideturtle()
         btn2.hideturtle()
         btn3.hideturtle()
+        ai_yes.hideturtle()
+        ai_no.hideturtle()
         pad_1.showturtle()
         pad_2.showturtle()
         ball.showturtle()
@@ -336,6 +394,11 @@ while True:
     time.sleep(1/240)
     window.update()
     if game_state == "game1":
+        if ai_state == "true":
+            if pad_2.ycor() < ball.ycor() + 50:
+                pad_2.sety(pad_2.ycor() + ai_speed)
+            elif pad_2.ycor() > ball.ycor() + 50:
+                pad_2.sety(pad_2.ycor() - ai_speed)
         window.bgcolor("#b0afab")
         pad_1.shapesize(stretch_wid=5.5, stretch_len=1)
         pad_2.shapesize(stretch_wid=5.5, stretch_len=1)
@@ -404,6 +467,11 @@ while True:
             sound.play()
 
     if game_state == "game2":
+        if ai_state == "true":
+            if pad_2.ycor() < ball.ycor() + 70:
+                pad_2.sety(pad_2.ycor() + ai_speed)
+            elif pad_2.ycor() > ball.ycor() + 70:
+                pad_2.sety(pad_2.ycor() - ai_speed)
         window.bgcolor("#46579e")
         ball.setx(ball.xcor() + ball.dx)
         ball.sety(ball.ycor() + ball.dy)
@@ -477,6 +545,11 @@ while True:
             sound.play()
 
     if game_state == "game3":
+        if ai_state == "true":
+            if pad_2.ycor() < ball.ycor() + 40:
+                pad_2.sety(pad_2.ycor() + ai_speed)
+            elif pad_2.ycor() > ball.ycor() + 40:
+                pad_2.sety(pad_2.ycor() - ai_speed)
 
         window.bgcolor("#E87DA3")
         pad_1.shapesize(stretch_wid=18.5, stretch_len=1)
