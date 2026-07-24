@@ -13,4 +13,4 @@ There is also an option that allows you to play against an AI. This AI uses very
 The gamemodes and AI toggle can be chosen by clicking their respective 'buttons'.
 
 ## How do I run the game?
-You can download the executable either from the 'Releases' tab or the 'pong.zip' in the master branch. If you download the executable from 'Releases', you **must** also download the Assets folder (master branch) or the program will not run. If you download the 'pong.zip', make sure you extract it before trying to run it.
+You can download the executable either from the 'Releases' tab or the 'pong.zip' in the master branch. If you download the executable from 'Releases', you **must** also download the Assets folder (master branch) or the program will not run. If you download the 'pong.zip', make sure you extract it before trying to run it. *I was testing out the releases feature hence why there's 2 ways to download the program.*
