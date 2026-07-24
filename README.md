@@ -11,3 +11,6 @@ There are currently 3 different game modes.
 There is also an option that allows you to play against an AI. This AI uses very simple code (all it does is follow the y-coordinate of the ball at a set speed).
 
 The gamemodes and AI toggle can be chosen by clicking their respective 'buttons'.
+
+## How do I run the game?
+You can download the executable either from the 'Releases' tab or the 'pong.zip' in the master branch. If you download the executable from 'Releases', you **must** also download the Assets folder (master branch) or the program will not run. If you download the 'pong.zip', make sure you extract it before trying to run it.
